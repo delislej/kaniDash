@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Collapsible
+{
+  margin: 1rem 0;
+  border: 1px solid transparent;
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px #888;
+  background-color: #fff;
+  transition: background-color 300ms;
+
+}
