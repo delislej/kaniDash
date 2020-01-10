@@ -12,16 +12,32 @@ code {
     monospace;
 }
 
-.Collapsible
+.mainColl
 {
-  margin: 1rem 0;
+  margin: 1rem;
   border: 1px solid transparent;
   padding: 1rem;
   justify-content: space-between;
   align-items: center;
   border-radius: 2px;
-  box-shadow: 0 2px 4px #888;
-  background-color: #fff;
+  box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+  background-color: #d8d8d8;
+  transition: background-color 300ms;
+
+}
+
+
+
+.Collapsible
+{
+  margin: 1rem;
+
+  padding: 1rem;
+  justify-content: space-between;
+  align-items: baseline;
+  border-radius: 2px;
+  box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
+  background-color: #aeaeae;
   transition: background-color 300ms;
 
 }
