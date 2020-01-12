@@ -8,34 +8,71 @@ function Subject(input){
 
     let readings = [];
     let meanings = [];
+    let type = [];
+    let trigger = [];
 
 
-    //console.log(input.data[0])
-        for(let i = 0; i < input.data[0].data.readings.length;i++)
-        {
-            //console.log(input.data[0].data.readings[i].reading)
-            if(input.data[0].data.readings[i].primary === true) {
-                readings.push(<span><span style={prim} key={i}>Primary</span><span>: {input.data[0].data.readings[i].reading}</span></span>)
+
+    if(input.object === 'collection') {
+
+        type.push(input.data[0].object);
+        trigger.push(input.data[0].data.characters);
+        if (!(typeof (input.data[0].data.readings) === 'undefined')) {
+            for (let i = 0; i < input.data[0].data.readings.length; i++) {
+                //console.log(input.data[0].data.readings[i].reading)
+                if (input.data[0].data.readings[i].primary === true) {
+                    readings.push(<span><span style={prim}
+                                              key={i}>Primary</span><span>: {input.data[0].data.readings[i].reading}</span></span>)
+                } else {
+                    readings.push(<p> {input.data[0].data.readings[i].reading}</p>)
+                }
             }
-        else{
-                readings.push(<p> {input.data[0].data.readings[i].reading}</p>)
+        }
+
+
+        for (let i = 0; i < input.data[0].data.meanings.length; i++) {
+            //console.log(input.data[0].data.meanings[i].reading)
+            if (input.data[0].data.meanings[i].primary === true) {
+                meanings.push(<span><span
+                    style={prim}>Primary</span><span>: {input.data[0].data.meanings[i].meaning}</span></span>)
+            } else {
+                meanings.push(<p> {input.data[0].data.meanings[i].meaning}</p>)
+            }
+        }
+    }
+    else{
+        type.push(input.object);
+        trigger.push(input.data.characters);
+        if (!(typeof (input.data.readings) === 'undefined')) {
+            for (let i = 0; i < input.data.readings.length; i++) {
+                //console.log(input.data[0].data.readings[i].reading)
+                if (input.data.readings[i].primary === true) {
+                    readings.push(<span><span style={prim}
+                                              key={i}>Primary</span><span>: {input.data.readings[i].reading}</span></span>)
+                } else {
+                    readings.push(<p> {input.data.readings[i].reading}</p>)
+                }
             }
         }
 
-    for(let i = 0; i < input.data[0].data.meanings.length;i++)
-    {
-        //console.log(input.data[0].data.meanings[i].reading)
-        if(input.data[0].data.meanings[i].primary === true) {
-            meanings.push(<span><span style={prim}>Primary</span><span>: {input.data[0].data.meanings[i].meaning}</span></span>)
+
+        for (let i = 0; i < input.data.meanings.length; i++) {
+            //console.log(input.data[0].data.meanings[i].reading)
+            if (input.data.meanings[i].primary === true) {
+                meanings.push(<span><span
+                    style={prim}>Primary</span><span>: {input.data.meanings[i].meaning}</span></span>)
+            } else {
+                meanings.push(<p> {input.data.meanings[i].meaning}</p>)
+            }
         }
-        else{
-            meanings.push(<p> {input.data[0].data.meanings[i].meaning}</p>)
-        }
+
+
+
     }
 
     return (
-        <Collapsible trigger={input.data[0].data.characters}>
-            Type: {input.data[0].object}
+        <Collapsible trigger={trigger} >
+            Type: {type}
             <Collapsible trigger={`readings`}>
                 {readings}
             </Collapsible>
