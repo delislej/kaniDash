@@ -10,7 +10,8 @@ class LevelTile extends Component {
             series: [44, 55, 67],
             options: {
                 chart: {
-                    height: 150,
+                    height: '80',
+                    width: '200',
                     type: 'radialBar',
                 },
                 plotOptions: {
@@ -43,8 +44,9 @@ class LevelTile extends Component {
 
             let x = {
                 chart: {
-                    height: 100,
-                    type: 'radialBar',
+                    height: "100",
+                    width:"50px",
+                    type: 'radialBar'
                 },
                 plotOptions: {
                     radialBar: {
@@ -70,7 +72,9 @@ class LevelTile extends Component {
             };
 
             chartBuffer.push(
-                <Chart options={x} series={this.props.progData} type="radialBar" width={200} height={300} />
+
+                <Chart options={x} series={this.props.progData} type="radialBar" width={200} height={250} />
+
             );
 
         //console.log(chartBuffer);

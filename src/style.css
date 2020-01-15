@@ -30,6 +30,7 @@ code {
 
 .chart
 {
+  display: inline-block;
   width: 33%;
 }
 
@@ -63,6 +64,8 @@ code {
   background-color: #BDBDBD;
   animation: grow 5s infinite;
 }
+
+
 
 .child {
   max-width: 3em;

@@ -12,7 +12,9 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            loading: false
+            chartsLoading: true,
+            shameLoading:true,
+            levelsLoading:true
         };
 
 
@@ -27,8 +29,7 @@ class App extends Component {
         let ep2 = 'subjects?ids=';
         let progEp ='assignments?';
         let token = 'c456bd21-adcc-4b74-956f-22d4785633c7';
-        this.setState({loading: true
-        });
+
 
         let userStats =await kaniFetch("user",token).then(function (res) {
             let userStats = {user:null, level:0};
@@ -89,8 +90,14 @@ class App extends Component {
         let pBuff = [];
         for(let i = 0; i < lvls.length;i++)
         {
-            pBuff.push(<div className="chart"><LevelTile  level={lvls[i]} progData={progress[i]}/></div>)
+            pBuff.push(<LevelTile  level={lvls[i]} progData={progress[i]}/>)
         }
+
+        this.setState({
+            charts:pBuff,
+            chartsLoading:false});
+
+
 
 
         let data =  await kaniFetch(ep1,token).then(function(res) {
@@ -112,6 +119,10 @@ class App extends Component {
         });
 
 
+        this.setState({buffer:data,
+            shameLoading:false});
+
+
         for(let i = 1; i <= userStats.level;i++) {
             levelBuff = [];
             //console.log(`level` + i);
@@ -131,29 +142,33 @@ class App extends Component {
                 </Collapsible>)
         }
 
-        this.setState({buffer:data,
+        this.setState({
             buffer2:level,
-        charts:pBuff});
+        levelsLoading:false});
 
-        this.setState({buffer:data,
-            loading:false});
+
     }
 
 
 
 
     render() {
-        const text = this.state.loading ? "loading..." :`Wall of shame(55%>):`;
-        const text2 = this.state.loading ? "loading..." :`levels:`;
+        const text = this.state.shameLoading ? "loading..." :`Wall of shame(55%>):`;
+        const text2 = this.state.levelsLoading ? "loading..." :`levels:`;
+        const text3 = this.state.chartsLoading ? "loading..." :``;
         return (
             <div>
-                <div >
-                {this.state.charts}
+                <div className="mainColl">
+                    <div className="container">
+                        {text3}
+                    {this.state.charts}
+                    </div>
                 </div>
             <Collapsible classParentString={"mainColl"} trigger={text}  triggerTagName={"div"} >
             {
 
                 this.state.buffer
+
             }
             </Collapsible>
 
