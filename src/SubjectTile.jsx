@@ -39,7 +39,6 @@ class SubjectTile extends Component {
         if (!(typeof (this.props.data.data.readings) === 'undefined')) {
             this.setState({readNum:this.props.data.data.readings.length})
             for (let i = 0; i < this.props.data.data.readings.length; i++) {
-                //console.log(input.data[0].data.readings[i].reading)
                 if (this.props.data.data.readings[i].primary === true || (this.props.data.data.readings.length === 1)) {
                     readBuff.push(<span>
                             <span className="prim" key={i}>Primary</span>

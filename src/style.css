@@ -28,11 +28,15 @@ code {
 
 }
 
+.chart
+{
+  width: 33%;
+}
 
 
 
 
-.levelTile
+.itemTile
 {
   margin: 1rem;
   border: 1px solid transparent;
@@ -45,6 +49,8 @@ code {
   transition: background-color 300ms;
 
 }
+
+@media only screen and (min-width: 450px) {
 
 
 .container {
@@ -65,6 +71,7 @@ code {
   margin: 0.4em;
   border-radius: 1em;
   background-color: lightblue;
+}
 }
 
 

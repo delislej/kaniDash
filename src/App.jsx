@@ -4,7 +4,7 @@ import Subject from "./Subject";
 import SubjectTile from "./SubjectTile";
 import "./style.css"
 import kaniFetch from "./kaniFetch";
-import Chart from 'react-apexcharts'
+import LevelTile from "./LevelTile.jsx";
 
 
 class App extends Component {
@@ -12,37 +12,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-            loading: false,
-            series: [44, 55, 67],
-            options: {
-                chart: {
-                    height: 150,
-                    type: 'radialBar',
-                },
-                plotOptions: {
-                    radialBar: {
-                        dataLabels: {
-                            name: {
-                                fontSize: '22px',
-                            },
-                            value: {
-                                fontSize: '16px',
-                            },
-                            total: {
-                                show: true,
-                                label: 'Level',
-                                formatter: function (w) {
-                                    // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
-                                    return 1
-                                }
-                            }
-                        }
-                    }
-                },
-                labels: ['Vocab', 'Kanji', 'Radical'],
-            },
-
-
+            loading: false
         };
 
 
@@ -55,6 +25,7 @@ class App extends Component {
         let levelBuff=[];
         let ep1 = 'review_statistics?percentages_less_than=55';
         let ep2 = 'subjects?ids=';
+        let progEp ='assignments?';
         let token = 'c456bd21-adcc-4b74-956f-22d4785633c7';
         this.setState({loading: true
         });
@@ -65,6 +36,61 @@ class App extends Component {
             userStats.level = res.data.level;
             return userStats;
         });
+        let lvls = [];
+        if(userStats.level === 0)
+        {
+            lvls = [0,1]
+        }
+        else
+        {
+            lvls = [userStats.level-1,userStats.level,userStats.level+1]
+        }
+        let progress = [];
+        for(let i = 0; i < lvls.length;i++)
+            {
+                let passRad =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=radical ",token).then(function (res) {
+                    //console.log(res);
+                    return res;
+
+                });
+
+                let passKan =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=kanji",token).then(function (res) {
+                    //console.log(res);
+                    return res;
+
+                });
+
+                let passVoc =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=vocabulary",token).then(function (res) {
+                    //console.log(res);
+                    return res;
+
+                });
+                let subRad =await kaniFetch("subjects?levels=" + lvls[i] +"&types=radical",token).then(function (res) {
+                    //console.log(res);
+
+                    return res;
+
+                });
+                let subKan =await kaniFetch("subjects?levels=" + lvls[i] +"&types=kanji",token).then(function (res) {
+                    //console.log(res);
+                    return res;
+
+                });
+                let subVoc =await kaniFetch("subjects?levels=" + lvls[i] +"&types=vocabulary",token).then(function (res) {
+                    //console.log(res);
+                    return res;
+
+                });
+                progress.push([(100*passVoc.total_count/subVoc.total_count).toFixed(0),(100*passKan.total_count/subKan.total_count).toFixed(0),(100*passRad.total_count/subRad.total_count).toFixed(0)])
+
+
+            }
+
+        let pBuff = [];
+        for(let i = 0; i < lvls.length;i++)
+        {
+            pBuff.push(<div className="chart"><LevelTile  level={lvls[i]} progData={progress[i]}/></div>)
+        }
 
 
         let data =  await kaniFetch(ep1,token).then(function(res) {
@@ -77,13 +103,15 @@ class App extends Component {
                     setTimeout(null,3000)
                 }
                 kaniFetch(ep2+res.data[i].data.subject_id,token).then(function (res) {
-                    console.log(res);
+                    //console.log(res);
                     shameBuff.push(Subject(res))
 
                 })
             }
             return shameBuff;
         });
+
+
         for(let i = 1; i <= userStats.level;i++) {
             levelBuff = [];
             //console.log(`level` + i);
@@ -93,21 +121,19 @@ class App extends Component {
 
             for(let i = 0; i < subjects.length;i++)
             {
-                console.log(subjects[i]);
                 levelBuff.push(<SubjectTile data={subjects[i]}/>);
             }
-            level.push(<Collapsible classParentString={"levelTile"} trigger={`level: ${i}`}>
-        <div className="container">
+            level.push(<Collapsible classParentString={"itemTile"} trigger={`level: ${i}`}>
+                <div className="container">
                 {levelBuff}
                 </div>
 
                 </Collapsible>)
-
-
         }
 
         this.setState({buffer:data,
-            buffer2:level});
+            buffer2:level,
+        charts:pBuff});
 
         this.setState({buffer:data,
             loading:false});
@@ -121,9 +147,10 @@ class App extends Component {
         const text2 = this.state.loading ? "loading..." :`levels:`;
         return (
             <div>
-                <Chart options={this.state.options} series={this.state.series} type="radialBar" width={200} height={300} />
+                <div >
+                {this.state.charts}
+                </div>
             <Collapsible classParentString={"mainColl"} trigger={text}  triggerTagName={"div"} >
-
             {
 
                 this.state.buffer
@@ -135,13 +162,7 @@ class App extends Component {
                 this.state.buffer2
             }
             </Collapsible>
-
-
-
             </div>
-
-
-
     )
     }
 }
