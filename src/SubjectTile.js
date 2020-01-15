@@ -1,38 +1,76 @@
 import React, {Component} from 'react';
 import Collapsible from 'react-collapsible'
+import "./style.css";
 
 class SubjectTile extends Component {
     constructor(props)
     {
-        super(props)
+
+        super(props);
         this.state= ({
             characters:"default",
             readings:["default reading"],
+            readNum:0,
+            meanNum:0,
             meanings:["default meaning","default meaning2"],
             url:"www.derp.com",
             level:-1
-        })
+        });
     }
     componentDidMount() {
-        console.log(this.props.data);
-        let meanBuff = []
-
+        let meanBuff = [];
+        let readBuff = [];
         let meanings = this.state.meanings;
+        meanings = this.props.data.data.meanings;
 
-        for(let i = 0; i < meanings.length;i++)
-        {
-            meanBuff.push(<p>{meanings[i]}</p>)
+        for(let i = 0; i < meanings.length;i++) {
+            this.setState({characters:this.props.data.data.meanings[0].meaning})
+            if (this.props.data.data.meanings[i].primary) {
+                meanBuff.push(<span>
+                            <span className="prim" key={i}>Primary</span>
+                            <span>: {this.props.data.data.meanings[i].meaning}</span>
+                    </span>)
+            }
+            else {
+                meanBuff.push(<p>{meanings[i].meaning}</p>)
+            }
         }
-        this.setState({meanings: meanBuff})
+
+        if (!(typeof (this.props.data.data.readings) === 'undefined')) {
+            this.setState({readNum:this.props.data.data.readings.length})
+            for (let i = 0; i < this.props.data.data.readings.length; i++) {
+                //console.log(input.data[0].data.readings[i].reading)
+                if (this.props.data.data.readings[i].primary === true || (this.props.data.data.readings.length === 1)) {
+                    readBuff.push(<span>
+                            <span className="prim" key={i}>Primary</span>
+                            <span>: {this.props.data.data.readings[i].reading}</span>
+                    </span>
+                    )
+                } else {
+                    readBuff.push(<p> {this.props.data.data.readings[i].reading}</p>)
+                }
+            }
+        }
+
+        if(this.props.data.data.characters !== null)
+        {
+            this.setState({characters:this.props.data.data.characters})
+        }
+
+        this.setState({
+            meanings: meanBuff,
+            readings: readBuff,
+            meanNum:this.props.data.data.meanings.length
+
+        });
     }
-
-
 
     render() {
         return (
-            <Collapsible trigger={this.state.characters}>
-                <Collapsible trigger={"readings"}><span>{this.state.readings}</span></Collapsible>
-                <Collapsible trigger={"meanings"}><span>{this.state.meanings}</span></Collapsible>
+            <Collapsible trigger={this.state.characters} className="child">
+                <span> <a href={this.props.data.data.document_url} target="_blank" rel="noopener noreferrer">Info</a> </span>
+                <Collapsible trigger={`readings: ${this.state.readNum}`}><span>{this.state.readings}</span></Collapsible>
+                <Collapsible trigger={`meanings: ${this.state.meanNum}`}><span>{this.state.meanings}</span></Collapsible>
             </Collapsible>
         );
     }
