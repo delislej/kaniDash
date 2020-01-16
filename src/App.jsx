@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import Collapsible from 'react-collapsible';
-import Subject from "./Subject";
 import SubjectTile from "./SubjectTile";
 import "./style.css"
 import kaniFetch from "./kaniFetch";
@@ -16,9 +15,6 @@ class App extends Component {
             shameLoading:true,
             levelsLoading:true
         };
-
-
-
     }
 
     async componentDidMount() {
@@ -29,7 +25,6 @@ class App extends Component {
         let ep2 = 'subjects?ids=';
         let progEp ='assignments?';
         let token = 'c456bd21-adcc-4b74-956f-22d4785633c7';
-
 
         let userStats =await kaniFetch("user",token).then(function (res) {
             let userStats = {user:null, level:0};
@@ -50,41 +45,27 @@ class App extends Component {
         for(let i = 0; i < lvls.length;i++)
             {
                 let passRad =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=radical ",token).then(function (res) {
-                    //console.log(res);
                     return res;
-
                 });
 
                 let passKan =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=kanji",token).then(function (res) {
-                    //console.log(res);
                     return res;
-
                 });
 
                 let passVoc =await kaniFetch(progEp+"levels=" + lvls[i] + "&passed=true&subject_types=vocabulary",token).then(function (res) {
-                    //console.log(res);
                     return res;
-
                 });
                 let subRad =await kaniFetch("subjects?levels=" + lvls[i] +"&types=radical",token).then(function (res) {
-                    //console.log(res);
-
                     return res;
-
                 });
                 let subKan =await kaniFetch("subjects?levels=" + lvls[i] +"&types=kanji",token).then(function (res) {
-                    //console.log(res);
                     return res;
-
                 });
                 let subVoc =await kaniFetch("subjects?levels=" + lvls[i] +"&types=vocabulary",token).then(function (res) {
-                    //console.log(res);
                     return res;
-
                 });
+
                 progress.push([(100*passVoc.total_count/subVoc.total_count).toFixed(0),(100*passKan.total_count/subKan.total_count).toFixed(0),(100*passRad.total_count/subRad.total_count).toFixed(0)])
-
-
             }
 
         let pBuff = [];
@@ -104,14 +85,13 @@ class App extends Component {
 
             for(let i = 0; i < res.total_count;i++)
             {
-
                 if( i%15===0)
                 {
                     setTimeout(null,3000)
                 }
                 kaniFetch(ep2+res.data[i].data.subject_id,token).then(function (res) {
-                    //console.log(res);
-                    shameBuff.push(Subject(res))
+                    console.log(res.data[0]);
+                    shameBuff.push(<SubjectTile data={res.data[0]}/>)
 
                 })
             }
@@ -125,7 +105,6 @@ class App extends Component {
 
         for(let i = 1; i <= userStats.level;i++) {
             levelBuff = [];
-            //console.log(`level` + i);
             let subjects = await kaniFetch('subjects?levels=' + i, token).then(function (res) {
                 return res.data;
             });
