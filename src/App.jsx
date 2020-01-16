@@ -79,8 +79,6 @@ class App extends Component {
             chartsLoading:false});
 
 
-
-
         let data =  await kaniFetch(ep1,token).then(function(res) {
 
             for(let i = 0; i < res.total_count;i++)
@@ -113,12 +111,13 @@ class App extends Component {
             {
                 levelBuff.push(<SubjectTile data={subjects[i]}/>);
             }
-            level.push(<Collapsible classParentString={"itemTile"} trigger={`level: ${i}`}>
+            level.push(
+                <span><Collapsible classParentString={"itemTile"} trigger={`level: ${i}`} triggerTagName={"div"}>
                 <div className="container">
                 {levelBuff}
                 </div>
 
-                </Collapsible>)
+                </Collapsible></span>)
         }
 
         this.setState({
@@ -127,9 +126,6 @@ class App extends Component {
 
 
     }
-
-
-
 
     render() {
         const text = this.state.shameLoading ? "loading..." :`Wall of shame(55%>):`;
