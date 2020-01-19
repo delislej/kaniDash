@@ -66,13 +66,13 @@ class SubjectTile extends Component {
 
     render() {
         return (
-            <Collapsible trigger={this.state.characters} className="child" triggerTagName={"div"}>
-                <span> <a href={this.props.data.data.document_url} target="_blank" rel="noopener noreferrer">Info</a> </span>
+            <Collapsible trigger={<span>{this.state.characters} | <a href={this.props.data.data.document_url} target="_blank" rel="noopener noreferrer">Info</a> | M:{this.state.meanNum} | R:{this.state.readNum}</span>} className="child" triggerTagName={"div"}>
+
                 <div>
-                <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
+                    <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
                 </div>
                 <div>
-                <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
+                    <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
                 </div>
             </Collapsible>
         );
