@@ -14,19 +14,14 @@ code {
 .prim{
   color: red;
 }
-.mainColl
-{
-  margin: 1rem;
-  border: 1px solid transparent;
-  padding: 1rem;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 2px;
-  box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
-  background-color: #d8d8d8;
-  transition: background-color 300ms;
 
+.avatar{
+  background-color: red;
 }
+
+
+
+
 
 .chart
 {
@@ -42,14 +37,12 @@ code {
   margin: 1rem;
   border: 1px solid transparent;
   padding: 1rem;
-  justify-content: space-between;
-
   border-radius: 2px;
   box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
-  background-color: #d8d8d8;
   transition: background-color 300ms;
 
 }
+
 
 @media only screen and (min-width: 450px) {
 
@@ -61,7 +54,7 @@ code {
   width: 100%;
   min-height: 100%;
   margin: 0px auto;
-  background-color: #BDBDBD;
+
   animation: grow 5s infinite;
 }
 
@@ -73,7 +66,6 @@ code {
 
   margin: 0.4em;
   border-radius: 1em;
-  background-color: lightblue;
 }
 }
 
@@ -87,7 +79,6 @@ code {
   align-items: baseline;
   border-radius: 2px;
   box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
-  background-color: #aeaeae;
   transition: background-color 300ms;
 
 }

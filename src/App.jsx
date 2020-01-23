@@ -5,6 +5,13 @@ import "./style.css"
 import Axios from "axios";
 import LevelTile from "./LevelTile.jsx";
 import ShameTile from "./ShameTile"
+import { Navbar } from 'rsuite';
+import {Panel} from 'rsuite';
+import {PanelGroup} from 'rsuite';
+import {Nav} from 'rsuite';
+
+import {Icon} from 'rsuite';
+import "rsuite/dist/styles/rsuite-dark.css"
 
 
 
@@ -50,9 +57,12 @@ class App extends Component {
         for(let i = 0; i < lvls.length;i++)
             {
                 let stats = await Axios.all([
-                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] + "&passed=true&subject_types=radical" ,requestHeaders),
-                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] + "&passed=true&subject_types=kanji",requestHeaders),
-                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] + "&passed=true&subject_types=vocabulary",requestHeaders),
+                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] +
+                        "&passed=true&subject_types=radical" ,requestHeaders),
+                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] +
+                        "&passed=true&subject_types=kanji",requestHeaders),
+                    Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i] +
+                        "&passed=true&subject_types=vocabulary",requestHeaders),
                     Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=radical",requestHeaders),
                     Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=kanji",requestHeaders),
                     Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=vocabulary",requestHeaders)])
@@ -60,21 +70,25 @@ class App extends Component {
                     return [passRad.data,passKan.data,passVoc.data,subRad.data,subKan.data,subVoc.data]
                 }));
 
-                progress.push([(100*stats[2].total_count/stats[5].total_count).toFixed(0),(100*stats[1].total_count/stats[4].total_count).toFixed(0),(100*stats[0].total_count/stats[3].total_count).toFixed(0)])
+                progress.push([(100*stats[2].total_count/stats[5].total_count).toFixed(0),
+                    (100*stats[1].total_count/stats[4].total_count).toFixed(0),
+                    (100*stats[0].total_count/stats[3].total_count).toFixed(0)])
             }
 
         let pBuff = [];
-        for(let i = 0; i < lvls.length;i++)
-        {
-            pBuff.push(<LevelTile  level={lvls[i]} progData={progress[i]}/>)
-        }
+
+            pBuff.push(
+                <LevelTile  level={lvls[0]} progData={progress[0]}/>
+            );
+
 
         this.setState({
             charts:pBuff,
             chartsLoading:false});
 
 
-        let data =  await Axios.get('https://api.wanikani.com/v2/review_statistics?percentages_less_than=55',requestHeaders).then(function(res) {
+        let data =  await Axios.get('https://api.wanikani.com/v2/review_statistics?percentages_less_than=55',requestHeaders)
+            .then(function(res) {
             let promises = [];
             for(let i = 0; i < res.data.total_count;i++)
             {
@@ -128,25 +142,46 @@ class App extends Component {
         const text3 = this.state.chartsLoading ? "loading... Level Stats" :``;
         return (
             <div>
-                <div className="mainColl">
+                <Navbar>
+                    <Navbar.Header>
+                        <a href="#" className="navbar-brand logo">Kanidash</a>
+                    </Navbar.Header>
+                    <Navbar.Body>
+                        <Nav pullRight>
+                            <Nav.Item icon={<Icon icon="cog" />} >Settings</Nav.Item>
+                        </Nav>
+                    </Navbar.Body>
+                </Navbar>
+
+
                     <div className="container">
                         {text3}
+
                     {this.state.charts}
+
                     </div>
-                </div>
-            <Collapsible classParentString={"mainColl"} trigger={text}  triggerTagName={"div"} >
-            {
 
-                this.state.buffer
+                <PanelGroup accordion bordered>
+                    <Panel header="Wall of shame">
+                        {this.state.buffer}
+                    </Panel>
+                    <Panel header="Panel 2">
+                        lol2
+                    </Panel>
+                    <Panel header="Panel 3">
+                        {
+                            this.state.buffer2
+                        }
+                    </Panel>
+                </PanelGroup>
 
-            }
-            </Collapsible>
 
-            <Collapsible classParentString={"mainColl"} trigger={text2}  triggerTagName={"div"} >
-            {
-                this.state.buffer2
-            }
-            </Collapsible>
+
+
+
+
+
+
             </div>
     )
     }

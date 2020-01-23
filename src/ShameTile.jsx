@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import Collapsible from 'react-collapsible'
+import MyButton from './MyButton'
 import "./style.css";
+
+
 
 class SubjectTile extends Component {
     constructor(props)
@@ -22,6 +25,7 @@ class SubjectTile extends Component {
         let readBuff = [];
         let meanings = this.state.meanings;
         meanings = this.props.data.data.meanings;
+
 
         for(let i = 0; i < meanings.length;i++) {
             this.setState({characters:this.props.data.data.meanings[0].meaning})
@@ -65,16 +69,14 @@ class SubjectTile extends Component {
     }
 
     render() {
-        return (
-            <Collapsible trigger={<span>{this.state.characters} | <a href={this.props.data.data.document_url} target="_blank" rel="noopener noreferrer">Info</a> | M:{this.state.meanNum} | R:{this.state.readNum}</span>} className="child" triggerTagName={"div"}>
 
-                <div>
+        return (
+
+            <Collapsible trigger={<span>{this.state.characters} | <MyButton color="primary" inputcolor="#00ffff" label="Info" url={this.props.data.data.document_url}/><MyButton label={`R: ${this.state.readNum}`} url="none"/><MyButton label={`M: ${this.state.meanNum}`} url="none"/></span>} className="itemTile" triggerTagName={"div"}>
                     <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
-                </div>
-                <div>
                     <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
-                </div>
             </Collapsible>
+
         );
     }
 }

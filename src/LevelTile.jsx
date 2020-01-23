@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
 import Chart from "react-apexcharts";
+import "./style.css"
+import Button from "@material-ui/core/Button";
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import Grid from '@material-ui/core/Grid';
+
 
 class LevelTile extends Component {
     constructor(props)
@@ -10,18 +16,16 @@ class LevelTile extends Component {
             series: [44, 55, 67],
             options: {
                 chart: {
-                    height: '80',
-                    width: '200',
                     type: 'radialBar',
                 },
                 plotOptions: {
                     radialBar: {
                         dataLabels: {
                             name: {
-                                fontSize: '22px',
+                                fontSize: '11px',
                             },
                             value: {
-                                fontSize: '16px',
+                                fontSize: '8px',
                             },
                             total: {
                                 show: true,
@@ -52,14 +56,14 @@ class LevelTile extends Component {
                     radialBar: {
                         dataLabels: {
                             name: {
-                                fontSize: '22px',
+                                fontSize: '11px',
                             },
                             value: {
-                                fontSize: '16px',
+                                fontSize: '8px',
                             },
                             total: {
                                 show: true,
-                                label: 'level: '+ this.props.level,
+                                label: this.props.level,
                                 formatter: function (w) {
                                     // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
                                     return "";
@@ -73,8 +77,22 @@ class LevelTile extends Component {
 
             chartBuffer.push(
 
-                <Chart options={x} series={this.props.progData} type="radialBar" width={200} height={250} />
 
+    <Grid container spacing={10}>
+        <Grid item xs={2}>
+            <Button variant="contained" color="primary">
+                <KeyboardArrowLeft/>
+            </Button>
+        </Grid>
+        <Grid item xs={4}>
+            <Chart options={x} series={this.props.progData} type="radialBar"  width={175} height={250} />
+    </Grid>
+        <Grid item xs={2}>
+            <Button variant="contained" color="primary">
+                <KeyboardArrowRight/>
+            </Button>
+        </Grid>
+    </Grid>
             );
 
         //console.log(chartBuffer);
@@ -84,9 +102,9 @@ class LevelTile extends Component {
 
     render() {
         return (
-            <p>
-                {this.state.buff}
-            </p>
+
+                <h1>{this.state.buff}</h1>
+
         );
     }
 }
