@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LevelTile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/LevelTile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ShameTile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShameTile.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,7 +124,7 @@
       <workItem from="1579157379582" duration="752000" />
       <workItem from="1579217823714" duration="18799000" />
       <workItem from="1579471078054" duration="4923000" />
-      <workItem from="1579495876038" duration="57673000" />
+      <workItem from="1579495876038" duration="59963000" />
     </task>
     <servers />
   </component>

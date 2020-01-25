@@ -156,11 +156,9 @@ class App extends Component {
                 </Navbar>
 
 
-                    <div className="container">
+                    <div>
                         {text3}
-                        {
-                            //console.log(this.state.charts)
-                        }
+
                     {this.state.charts}
 
                     </div>

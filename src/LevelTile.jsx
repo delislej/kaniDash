@@ -119,7 +119,7 @@ class LevelTile extends Component {
         chartBuffer.push(
 
 
-            <Grid container spacing={10} key={5321}>
+            <Grid container  key={5321}>
                 <Grid item xs={2}>
                     <Button variant="contained" color="primary" onClick={this.left}>
                         <KeyboardArrowLeft/>

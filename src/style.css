@@ -51,8 +51,6 @@ code {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
-  min-height: 100%;
   margin: 0px auto;
 
   animation: grow 5s infinite;
