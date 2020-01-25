@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0abc1211-8d62-4dd1-9005-fca986645aca" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MyButton.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LevelTile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/LevelTile.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ShameTile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShameTile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SubjectTile.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/SubjectTile.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,6 +52,7 @@
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2.3\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -128,7 +124,7 @@
       <workItem from="1579157379582" duration="752000" />
       <workItem from="1579217823714" duration="18799000" />
       <workItem from="1579471078054" duration="4923000" />
-      <workItem from="1579495876038" duration="39412000" />
+      <workItem from="1579495876038" duration="57673000" />
     </task>
     <servers />
   </component>

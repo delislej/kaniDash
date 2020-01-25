@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import Collapsible from 'react-collapsible'
-import MyButton from './MyButton'
+import {Panel} from 'rsuite';
 import "./style.css";
-
-
 
 class SubjectTile extends Component {
     constructor(props)
@@ -30,13 +27,13 @@ class SubjectTile extends Component {
         for(let i = 0; i < meanings.length;i++) {
             this.setState({characters:this.props.data.data.meanings[0].meaning})
             if (this.props.data.data.meanings[i].primary) {
-                meanBuff.push(<span>
+                meanBuff.push(<span key={i+500}>
                             <span className="prim" key={i}>Primary</span>
                             <span>: {this.props.data.data.meanings[i].meaning}</span>
                     </span>)
             }
             else {
-                meanBuff.push(<p>{meanings[i].meaning}</p>)
+                meanBuff.push(<p key={i+12000}>{meanings[i].meaning}</p>)
             }
         }
 
@@ -44,13 +41,13 @@ class SubjectTile extends Component {
             this.setState({readNum:this.props.data.data.readings.length})
             for (let i = 0; i < this.props.data.data.readings.length; i++) {
                 if (this.props.data.data.readings[i].primary === true || (this.props.data.data.readings.length === 1)) {
-                    readBuff.push(<span>
+                    readBuff.push(<span key={i+200}>
                             <span className="prim" key={i}>Primary</span>
                             <span>: {this.props.data.data.readings[i].reading}</span>
                     </span>
                     )
                 } else {
-                    readBuff.push(<p> {this.props.data.data.readings[i].reading}</p>)
+                    readBuff.push(<p key={19888+i}> {this.props.data.data.readings[i].reading}</p>)
                 }
             }
         }
@@ -68,14 +65,37 @@ class SubjectTile extends Component {
         });
     }
 
-    render() {
 
+
+    render() {
+        const Card = props => (
+            <Panel {...props} bordered>
+
+            </Panel>
+        );
         return (
 
-            <Collapsible trigger={<span>{this.state.characters} | <MyButton color="primary" inputcolor="#00ffff" label="Info" url={this.props.data.data.document_url}/><MyButton label={`R: ${this.state.readNum}`} url="none"/><MyButton label={`M: ${this.state.meanNum}`} url="none"/></span>} className="itemTile" triggerTagName={"div"}>
+<div>
+                <Panel header= {this.state.characters} collapsible shaded bordered style={{margin:"10px", backgroundColor: "#565656"}}>
+
+                    <Card>
+                        <Panel collapsible header="readings:" bordered shaded style={{marginBottom:"10px", backgroundColor: "#131313"}}>
+                         {this.state.readings}
+                        </Panel>
+                            <Panel collapsible header="meanings:"  bordered shaded style={{backgroundColor: "#131313"}}>
+                         {this.state.meanings}
+                            </Panel>
+                    </Card>
+
+
+                </Panel>
+</div>
+
+
+           /* <Collapsible trigger={<span>{this.state.characters} | <MyButton color="primary" inputcolor="#00ffff" label="Info" url={this.props.data.data.document_url}/><MyButton label={`R: ${this.state.readNum}`} url="none"/><MyButton label={`M: ${this.state.meanNum}`} url="none"/></span>} className="itemTile" triggerTagName={"div"}>
                     <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
                     <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
-            </Collapsible>
+            </Collapsible>*/
 
         );
     }

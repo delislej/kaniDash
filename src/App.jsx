@@ -10,6 +10,7 @@ import {Panel} from 'rsuite';
 import {PanelGroup} from 'rsuite';
 import {Nav} from 'rsuite';
 
+
 import {Icon} from 'rsuite';
 import "rsuite/dist/styles/rsuite-dark.css"
 
@@ -76,10 +77,11 @@ class App extends Component {
             }
 
         let pBuff = [];
-
             pBuff.push(
-                <LevelTile  level={lvls[0]} progData={progress[0]}/>
+                <LevelTile key={1337}  level={lvls} progData={progress}/>
             );
+
+            //console.log(storeProg);
 
 
         this.setState({
@@ -101,7 +103,7 @@ class App extends Component {
             let buffer= [];
             for (let i = 0; i < args.length; i++) {
                 buffer.push(
-                <ShameTile data={args[i].data.data[0]}/>);
+                <ShameTile key={3000+i} data={args[i].data.data[0]}/>);
             }
 
             return buffer;
@@ -121,10 +123,10 @@ class App extends Component {
 
             for(let i = 0; i < subjects.length;i++)
             {
-                levelBuff.push(<SubjectTile data={subjects[i]}/>);
+                levelBuff.push(<SubjectTile key={2000+i} data={subjects[i]}/>);
             }
             level.push(
-                <span><Collapsible classParentString={"itemTile"} trigger={`level: ${i}`} triggerTagName={"div"}>
+                <span key={9632+i}><Collapsible classParentString={"itemTile"} trigger={`level: ${i}`} triggerTagName={"div"}>
                 <div className="container">
                 {levelBuff}
                 </div>
@@ -141,7 +143,7 @@ class App extends Component {
         const text2 = this.state.levelsLoading ? "loading Levels ..." :`levels:`;
         const text3 = this.state.chartsLoading ? "loading... Level Stats" :``;
         return (
-            <div>
+            <div key={99999}>
                 <Navbar>
                     <Navbar.Header>
                         <a href="#" className="navbar-brand logo">Kanidash</a>
@@ -156,32 +158,28 @@ class App extends Component {
 
                     <div className="container">
                         {text3}
-
+                        {
+                            //console.log(this.state.charts)
+                        }
                     {this.state.charts}
 
                     </div>
 
-                <PanelGroup accordion bordered>
-                    <Panel header="Wall of shame">
+                <PanelGroup key={34567}  bordered>
+                    <Panel key={34568} collapsible header={text}>
                         {this.state.buffer}
+
+
                     </Panel>
-                    <Panel header="Panel 2">
-                        lol2
-                    </Panel>
-                    <Panel header="Panel 3">
+
+                    <Panel collapsible header={text2}>
+
                         {
                             this.state.buffer2
                         }
+
                     </Panel>
                 </PanelGroup>
-
-
-
-
-
-
-
-
             </div>
     )
     }
