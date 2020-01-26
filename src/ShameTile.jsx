@@ -92,11 +92,6 @@ class SubjectTile extends Component {
 </div>
 
 
-           /* <Collapsible trigger={<span>{this.state.characters} | <MyButton color="primary" inputcolor="#00ffff" label="Info" url={this.props.data.data.document_url}/><MyButton label={`R: ${this.state.readNum}`} url="none"/><MyButton label={`M: ${this.state.meanNum}`} url="none"/></span>} className="itemTile" triggerTagName={"div"}>
-                    <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
-                    <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
-            </Collapsible>*/
-
         );
     }
 }

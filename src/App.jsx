@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-import Collapsible from 'react-collapsible';
 import SubjectTile from "./SubjectTile";
 import "./style.css"
 import Axios from "axios";
@@ -125,12 +124,13 @@ class App extends Component {
             {
                 levelBuff.push(<SubjectTile key={2000+i} data={subjects[i]}/>);
             }
+
             level.push(
-                <span key={9632+i}><Collapsible classParentString={"itemTile"} trigger={`level: ${i}`} triggerTagName={"div"}>
-                <div className="container">
+                <span key={9632+i}><Panel collapsible bordered header={`level: ${i}`} style={{backgroundColor:"#005566"}}>
+                <div >
                 {levelBuff}
                 </div>
-                </Collapsible></span>)
+                </Panel></span>)
         }
 
         this.setState({

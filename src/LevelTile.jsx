@@ -119,17 +119,17 @@ class LevelTile extends Component {
         chartBuffer.push(
 
 
-            <Grid container  key={5321}>
+            <Grid container key={5321}>
                 <Grid item xs={2}>
-                    <Button variant="contained" color="primary" onClick={this.left}>
+                    <Button variant="contained" style={{ margin:0, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} color="primary" onClick={this.left}>
                         <KeyboardArrowLeft/>
                     </Button>
                 </Grid>
-                <Grid item xs={4}>
-                    <Chart options={x} series={this.state.data[this.state.curLvl]} type="radialBar"  width={175} height={250} />
+                <Grid item xs={8} style={{margin: 0}}>
+                    <Chart options={x} series={this.state.data[this.state.curLvl]} type="radialBar"  width={170} height={250} />
                 </Grid>
                 <Grid item xs={2}>
-                    <Button variant="contained" color="primary" onClick={this.right}>
+                    <Button variant="contained" style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} color="primary" onClick={this.right}>
                         <KeyboardArrowRight/>
                     </Button>
                 </Grid>

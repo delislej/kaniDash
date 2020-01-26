@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import Collapsible from 'react-collapsible'
 import "./style.css";
+import {Panel} from "rsuite";
 
 class SubjectTile extends Component {
     constructor(props)
@@ -65,13 +65,29 @@ class SubjectTile extends Component {
     }
 
     render() {
-        return (
-            <Collapsible trigger={this.state.characters} className="child" triggerTagName={"div"}>
-                <a href={this.props.data.data.document_url} target="_blank" rel="noopener noreferrer">Info</a>
-                <Collapsible trigger={`readings: ${this.state.readNum}`} triggerTagName={"div"}><span>{this.state.readings}</span></Collapsible>
-                <Collapsible trigger={`meanings: ${this.state.meanNum}`} triggerTagName={"div"}><span>{this.state.meanings}</span></Collapsible>
-            </Collapsible>
+        const Card = props => (
+            <Panel {...props} bordered>
+
+            </Panel>
         );
+        return (
+
+            <div>
+                <Panel header= {this.state.characters} collapsible shaded bordered style={{margin:"10px", backgroundColor: "#565656"}}>
+
+                    <Card>
+                        <Panel collapsible header="readings:" bordered shaded style={{marginBottom:"10px", backgroundColor: "#131313"}}>
+                            {this.state.readings}
+                        </Panel>
+                        <Panel collapsible header="meanings:"  bordered shaded style={{backgroundColor: "#131313"}}>
+                            {this.state.meanings}
+                        </Panel>
+                    </Card>
+
+
+                </Panel>
+            </div>
+        )
     }
 }
 

@@ -67,16 +67,3 @@ code {
 }
 }
 
-
-.Collapsible
-{
-  margin: 1rem;
-
-  padding: 1rem;
-  justify-content: space-between;
-  align-items: baseline;
-  border-radius: 2px;
-  box-shadow: 12px 0 15px -4px rgba(31, 73, 125, 0.8), -12px 0 8px -4px rgba(31, 73, 125, 0.8);
-  transition: background-color 300ms;
-
-}
