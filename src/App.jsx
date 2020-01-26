@@ -126,7 +126,7 @@ class App extends Component {
             }
 
             level.push(
-                <span key={9632+i}><Panel collapsible bordered header={`level: ${i}`} style={{backgroundColor:"#005566"}}>
+                <span key={9632+i}><Panel collapsible bordered header={`level: ${i}`} style={{ margin:"10px", backgroundColor:"#005566"}}>
                 <div >
                 {levelBuff}
                 </div>
@@ -145,7 +145,10 @@ class App extends Component {
         return (
             <div key={99999}>
                 <Navbar>
+
                     <Navbar.Header>
+
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a href="#" className="navbar-brand logo">Kanidash</a>
                     </Navbar.Header>
                     <Navbar.Body>

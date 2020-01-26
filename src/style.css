@@ -25,10 +25,8 @@ code {
 
 .chart
 {
-  display: inline-block;
-  width: 33%;
+  margin: 0 auto
 }
-
 
 
 
