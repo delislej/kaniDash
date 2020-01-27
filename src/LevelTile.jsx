@@ -125,15 +125,19 @@ class LevelTile extends Component {
                         <KeyboardArrowLeft/>
                     </Button>
                 </Grid>
-                <Grid item xs={8} style={{margin: 0}}>
+                <Grid item xs={6} style={{margin: 0}}>
                     <div className="chart">
                     <Chart options={x} series={this.state.data[this.state.curLvl]} type="radialBar"  width={170} height={250}  />
                     </div>
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={1}>
                     <Button variant="contained" style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} color="primary" onClick={this.right}>
                         <KeyboardArrowRight/>
                     </Button>
+                </Grid>
+
+                <Grid item xs={3}>
+                    <form>this is a form</form>
                 </Grid>
             </Grid>
         );
