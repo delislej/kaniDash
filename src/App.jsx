@@ -290,7 +290,7 @@ class App extends Component {
                     </Navbar>
 
 
-                    <body>Please enter a valid API key!<br/>
+                    <body>Please enter a valid API key in settings!<br/>
                     or test using this one "c456bd21-adcc-4b74-956f-22d4785633c7"
                     </body>
 
