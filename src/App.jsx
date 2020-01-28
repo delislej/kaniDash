@@ -11,7 +11,8 @@ import {Nav} from 'rsuite';
 import { Modal } from 'rsuite';
 import {Button} from 'rsuite';
 import {Icon} from 'rsuite';
-import "rsuite/dist/styles/rsuite-dark.css"
+
+import "rsuite/dist/styles/rsuite-default.css"
 
 
 
@@ -19,7 +20,11 @@ class App extends Component {
 
     constructor() {
         super();
+
+
+
         this.state = {
+            subSRSMap: {},
             token: '',
             chartsLoading: true,
             shameLoading:true,
@@ -45,7 +50,7 @@ class App extends Component {
         this.setState({
             token: this.state.apiCheck
         }, this.fetchData);
-        console.log(this.state);
+        this.close();
 
 
     };
@@ -69,6 +74,8 @@ class App extends Component {
 
 
     async fetchData() {
+
+
         let requestHeaders =
             {
                 headers: {'Authorization': 'Bearer ' + this.state.token}
@@ -93,7 +100,13 @@ class App extends Component {
             lvls = [userStats.level-1,userStats.level,userStats.level+1]
         }
         let progress = [];
-
+        let assignmentsHolder=[];
+        let srsData=[];
+        srsData[0]=0;
+        srsData[1]=0;
+        srsData[2]=0;
+        srsData[3]=0;
+        srsData[4]=0;
 
         for(let i = 0; i < lvls.length;i++)
         {
@@ -106,19 +119,57 @@ class App extends Component {
                     "&passed=true&subject_types=vocabulary",requestHeaders),
                 Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=radical",requestHeaders),
                 Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=kanji",requestHeaders),
-                Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=vocabulary",requestHeaders)])
-                .then(Axios.spread(function (passRad, passKan, passVoc, subRad,subKan,subVoc) {
-                    return [passRad.data,passKan.data,passVoc.data,subRad.data,subKan.data,subVoc.data]
+                Axios.get('https://api.wanikani.com/v2/subjects?levels=' + lvls[i] +"&types=vocabulary",requestHeaders),
+                Axios.get('https://api.wanikani.com/v2/assignments?levels=' + lvls[i],requestHeaders),])
+                .then(Axios.spread(function (passRad, passKan, passVoc, subRad,subKan,subVoc,srsStats) {
+                    return [passRad.data,passKan.data,passVoc.data,subRad.data,subKan.data,subVoc.data,srsStats]
                 }));
+
+            assignmentsHolder.push(stats[6].data);
+
 
             progress.push([(100*stats[2].total_count/stats[5].total_count).toFixed(0),
                 (100*stats[1].total_count/stats[4].total_count).toFixed(0),
                 (100*stats[0].total_count/stats[3].total_count).toFixed(0)])
         }
 
+        console.log(assignmentsHolder);
+        for(let i =0; i < assignmentsHolder.length; i++) {
+            console.log(assignmentsHolder[i].data.length);
+            for (let j = 0; j < assignmentsHolder[i].data.length; j++) {
+
+                console.log(assignmentsHolder[i].data[j].data.srs_stage);
+
+                if ([1, 2, 3, 4].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+
+                    srsData[0]++;
+                }
+                if ([5, 6].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+
+                    srsData[1]++;
+                }
+
+                if ([7].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+
+                    srsData[2]++;
+                }
+
+                if ([8].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+
+                    srsData[3]++;
+                }
+
+                if ([9].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+
+                    srsData[4]++;
+                }
+            }
+        }
+
+
         let pBuff = [];
         pBuff.push(
-            <LevelTile key={1337}  level={lvls} progData={progress}/>
+            <LevelTile key={1337}  level={lvls} progData={progress} stageCount={srsData}/>
         );
 
         //console.log(storeProg);
@@ -206,7 +257,7 @@ class App extends Component {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button form="myForm" key="submit" htmlType="submit" onClick={this.submit}>
+                            <Button onClick={this.submit}>
                                 Save Settings
                             </Button>
 
@@ -269,7 +320,7 @@ class App extends Component {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button form="myForm" key="submit" htmlType="submit" onClick={this.submit}>
+                            <Button onClick={this.submit}>
                                 Save Settings
                             </Button>
 
@@ -290,9 +341,9 @@ class App extends Component {
                     </Navbar>
 
 
-                    <body>Please enter a valid API key in settings!<br/>
+                    <h3>Please enter a valid API key in settings!<br/>
                     or test using this one "c456bd21-adcc-4b74-956f-22d4785633c7"
-                    </body>
+                    </h3>
 
 
                 </div>

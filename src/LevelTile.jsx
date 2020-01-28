@@ -12,6 +12,7 @@ class LevelTile extends Component {
     {
         super(props);
         this.state = {
+            stageCount:this.props.stageCount,
             curLvl:0,
             labelLvl:1,
             data:props.progData,
@@ -137,7 +138,15 @@ class LevelTile extends Component {
                 </Grid>
 
                 <Grid item xs={3}>
-                    <form>this is a form</form>
+                    Apr:{this.state.stageCount[0]}
+                    <br />
+                    GRU:{this.state.stageCount[1]}
+                    <br />
+                    MST:{this.state.stageCount[2]}
+                    <br />
+                    ENL:{this.state.stageCount[3]}
+                    <br />
+                    BRN:{this.state.stageCount[4]}
                 </Grid>
             </Grid>
         );
