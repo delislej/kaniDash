@@ -5,8 +5,20 @@ import {Panel} from "rsuite";
 class SubjectTile extends Component {
     constructor(props)
     {
+        let x = [];
+        x[1]="#4d79ff";
+        x[2]="#4d79ff";
+        x[3]="#4d79ff";
+        x[4]="#4d79ff";
+        x[5]="#348744";
+        x[6]="#348744";
+        x[7]="#9f9f31";
+        x[8]="#8f572d";
+        x[9]="#ac3737";
+        let color = x[props.srsData];
         super(props);
         this.state= ({
+            color:color,
             characters:"default",
             readings:["default reading"],
             readNum:0,
@@ -15,6 +27,7 @@ class SubjectTile extends Component {
             url:"www.derp.com",
             level:-1
         });
+        console.log(props);
     }
 
     componentDidMount() {
@@ -73,7 +86,7 @@ class SubjectTile extends Component {
         return (
 
             <div>
-                <Panel header= {this.state.characters} collapsible shaded bordered style={{margin:"10px", backgroundColor: "#565656"}}>
+                <Panel header= {this.state.characters} collapsible shaded bordered style={{margin:"10px", backgroundColor: this.state.color}}>
 
                     <Card>
                         <Panel collapsible header="readings:" bordered shaded style={{marginBottom:"10px", backgroundColor: "#131313"}}>

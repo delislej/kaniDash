@@ -24,7 +24,7 @@ class App extends Component {
 
 
         this.state = {
-            subSRSMap: {},
+            subSRSMap: [],
             token: '',
             chartsLoading: true,
             shameLoading:true,
@@ -74,6 +74,9 @@ class App extends Component {
 
 
     async fetchData() {
+
+
+
 
 
         let requestHeaders =
@@ -132,13 +135,17 @@ class App extends Component {
                 (100*stats[1].total_count/stats[4].total_count).toFixed(0),
                 (100*stats[0].total_count/stats[3].total_count).toFixed(0)])
         }
+        let subSRSData = [];
 
         console.log(assignmentsHolder);
         for(let i =0; i < assignmentsHolder.length; i++) {
             console.log(assignmentsHolder[i].data.length);
             for (let j = 0; j < assignmentsHolder[i].data.length; j++) {
 
+
+                subSRSData[`${assignmentsHolder[i].data[j].data.subject_id}`]=assignmentsHolder[i].data[j].data.srs_stage;
                 console.log(assignmentsHolder[i].data[j].data.srs_stage);
+                console.log(assignmentsHolder[i].data[j].data.subject_id);
 
                 if ([1, 2, 3, 4].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
 
@@ -165,6 +172,8 @@ class App extends Component {
                 }
             }
         }
+        console.log(subSRSData);
+
 
 
         let pBuff = [];
@@ -214,7 +223,7 @@ class App extends Component {
 
             for(let i = 0; i < subjects.length;i++)
             {
-                levelBuff.push(<SubjectTile key={2000+i} data={subjects[i]}/>);
+                levelBuff.push(<SubjectTile key={2000+i} srsData={subSRSData[subjects[i].id]} data={subjects[i]}/>);
             }
 
             level.push(
