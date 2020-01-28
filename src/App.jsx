@@ -12,7 +12,7 @@ import { Modal } from 'rsuite';
 import {Button} from 'rsuite';
 import {Icon} from 'rsuite';
 
-import "rsuite/dist/styles/rsuite-default.css"
+import "rsuite/dist/styles/rsuite-dark.css"
 
 
 
