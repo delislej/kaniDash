@@ -1,24 +1,18 @@
 import React, {Component} from 'react';
 import "./style.css";
 import {Panel} from "rsuite";
+import {Button} from "rsuite";
 
 class SubjectTile extends Component {
     constructor(props)
     {
-        let x = [];
-        x[1]="#4d79ff";
-        x[2]="#4d79ff";
-        x[3]="#4d79ff";
-        x[4]="#4d79ff";
-        x[5]="#348744";
-        x[6]="#348744";
-        x[7]="#9f9f31";
-        x[8]="#8f572d";
-        x[9]="#ac3737";
-        let color = x[props.srsData];
+        let  colors = ["","#4d79ff","#4d79ff","#4d79ff","#4d79ff","#348744","#348744","#9f9f31","#8f572d","#ac3737"];
+
+
         super(props);
+        console.log(props.data);
         this.state= ({
-            color:color,
+            color:colors[props.srsData],
             characters:"default",
             readings:["default reading"],
             readNum:0,
@@ -86,7 +80,7 @@ class SubjectTile extends Component {
         return (
 
             <div>
-                <Panel header= {this.state.characters} collapsible shaded bordered style={{margin:"10px", backgroundColor: this.state.color}}>
+                <Panel header= {<span><Button style={{backgroundColor:this.state.color}}>{this.state.characters}</Button><Button>{this.props.data.object}</Button></span>}  collapsible shaded bordered style={{margin:"10px", backgroundColor: this.state.color}}>
 
                     <Card>
                         <Panel collapsible header="readings:" bordered shaded style={{marginBottom:"10px", backgroundColor: "#131313"}}>
