@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import SubjectTile from "./SubjectTile";
+import TotalsBar from "./TotalsBar"
 import "./style.css"
 import Axios from "axios";
 import LevelTile from "./LevelTile.jsx";
@@ -137,16 +138,10 @@ class App extends Component {
         }
         let subSRSData = [];
 
-        console.log(assignmentsHolder);
+
         for(let i =0; i < assignmentsHolder.length; i++) {
-            console.log(assignmentsHolder[i].data.length);
             for (let j = 0; j < assignmentsHolder[i].data.length; j++) {
-
-
                 subSRSData[`${assignmentsHolder[i].data[j].data.subject_id}`]=assignmentsHolder[i].data[j].data.srs_stage;
-                console.log(assignmentsHolder[i].data[j].data.srs_stage);
-                console.log(assignmentsHolder[i].data[j].data.subject_id);
-
                 if ([1, 2, 3, 4].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
 
                     srsData[0]++;
@@ -172,20 +167,17 @@ class App extends Component {
                 }
             }
         }
-        console.log(subSRSData);
+
+        let totalData=[<TotalsBar data={srsData}/>];
+
+        let pBuff = [<LevelTile key={1337}  level={lvls} progData={progress} stageCount={srsData}/>];
 
 
-
-        let pBuff = [];
-        pBuff.push(
-            <LevelTile key={1337}  level={lvls} progData={progress} stageCount={srsData}/>
-        );
-
-        //console.log(storeProg);
 
 
         this.setState({
             charts:pBuff,
+            tData:totalData,
             chartsLoading:false});
 
 
@@ -236,6 +228,7 @@ class App extends Component {
 
         this.setState({
             buffer2:level,
+
             levelsLoading:false});
 
     }
@@ -247,9 +240,11 @@ class App extends Component {
     render() {
         if (this.state.token !== "") {
 
+
             const text = this.state.shameLoading ? "loading Shame..." : `Wall of shame(<55%):`;
             const text2 = this.state.levelsLoading ? "loading Levels ..." : `levels:`;
             const text3 = this.state.chartsLoading ? "loading... Level Stats" : ``;
+
             return (
                 <div key={99999}>
 
@@ -295,6 +290,11 @@ class App extends Component {
                     </div>
 
                     <PanelGroup key={34567} bordered>
+                        <Panel key={34568} >
+                            {this.state.tData}
+
+
+                        </Panel>
                         <Panel key={34568} collapsible header={text}>
                             {this.state.buffer}
 

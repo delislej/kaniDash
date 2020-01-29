@@ -10,7 +10,6 @@ class SubjectTile extends Component {
 
 
         super(props);
-        console.log(props.data);
         this.state= ({
             color:colors[props.srsData],
             characters:"default",
@@ -21,7 +20,6 @@ class SubjectTile extends Component {
             url:"www.derp.com",
             level:-1
         });
-        console.log(props);
     }
 
     componentDidMount() {

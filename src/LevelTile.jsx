@@ -143,7 +143,6 @@ class LevelTile extends Component {
             </Grid>
         );
 
-        //console.log(chartBuffer);
         this.setState({buff:chartBuffer})
 
     };
