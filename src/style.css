@@ -23,11 +23,16 @@ code {
 
 
 
-.chart
-{
-  margin: 0 auto
-}
 
+
+.chartContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-top: 2em;
+}
 
 
 .itemTile

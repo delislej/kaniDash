@@ -248,10 +248,9 @@ class App extends Component {
             return (
                 <div key={99999}>
 
-                    <Modal size={this.state.size} show={this.state.show} onHide={this.close}>
-                        <Modal.Header>
-                        </Modal.Header>
-                        <Modal.Body>
+                    <Modal size={"sm"}  show={this.state.show} onHide={this.close}>
+
+                        <Modal.Body style={{width: '80%'}}>
                             <Form id="settings">
                                 <FormGroup>
                                     <ControlLabel>API v2 Key</ControlLabel>
@@ -260,7 +259,7 @@ class App extends Component {
                                 </FormGroup>
                             </Form>
                         </Modal.Body>
-                        <Modal.Footer>
+                        <Modal.Footer style={{width: '80%'}}>
                             <Button onClick={this.submit}>
                                 Save Settings
                             </Button>
@@ -282,7 +281,7 @@ class App extends Component {
                     </Navbar>
 
 
-                    <div>
+                    <div className="chartContainer">
                         {text3}
 
                         {this.state.charts}

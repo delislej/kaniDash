@@ -4,7 +4,7 @@ import "./style.css"
 import Button from "@material-ui/core/Button";
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import Grid from '@material-ui/core/Grid';
+
 
 
 class LevelTile extends Component {
@@ -35,6 +35,7 @@ class LevelTile extends Component {
                                 label: 'Level',
                                 formatter: function (w) {
                                     // By default this function returns the average of all series. The below is just an example to show the use of custom formatter function
+                                    console.log(w.progData);
                                     return w.level
                                 }
                             }
@@ -120,27 +121,24 @@ class LevelTile extends Component {
         chartBuffer.push(
 
 
-            <Grid container key={5321}>
-                <Grid item xs={2}>
+            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                     <Button variant="contained" style={{ margin:0, maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} color="primary" onClick={this.left}>
                         <KeyboardArrowLeft/>
                     </Button>
-                </Grid>
-                <Grid item xs={6} style={{margin: 0}}>
-                    <div className="chart">
+
+
+
                     <Chart options={x} series={this.state.data[this.state.curLvl]} type="radialBar"  width={170} height={250}  />
-                    </div>
-                </Grid>
-                <Grid item xs={1}>
+
+
+
                     <Button variant="contained" style={{maxWidth: '30px', maxHeight: '30px', minWidth: '30px', minHeight: '30px'}} color="primary" onClick={this.right}>
                         <KeyboardArrowRight/>
                     </Button>
-                </Grid>
+            </div>
 
-                <Grid item xs={3}>
-                   -
-                </Grid>
-            </Grid>
+
+
         );
 
         this.setState({buff:chartBuffer})
