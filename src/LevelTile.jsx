@@ -67,11 +67,8 @@ class LevelTile extends Component {
     };
 
    left = () => {
-       if(this.state.curLvl === 0)
+       if(this.state.curLvl !== 0)
        {
-
-       }
-       else {
            let newLvl = this.state.curLvl;
            let newLablLevel = this.state.labelLvl;
            newLablLevel--;
@@ -86,6 +83,8 @@ class LevelTile extends Component {
     };
 
     updateChart = () => {
+
+        console.log(this.state.data);
 
         let chartBuffer = [];
 

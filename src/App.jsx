@@ -95,13 +95,16 @@ class App extends Component {
             return userStats;
         });
         let lvls = [];
+        console.log(userStats.level);
         if(userStats.level === 1 || userStats.level === 2 )
         {
             lvls = [1,2]
         }
         else
         {
-            lvls = [userStats.level-1,userStats.level,userStats.level+1]
+
+            lvls = [userStats.level-2,userStats.level-1,userStats.level]
+            console.log(lvls);
         }
         let progress = [];
         let assignmentsHolder=[];
@@ -141,30 +144,39 @@ class App extends Component {
 
         for(let i =0; i < assignmentsHolder.length; i++) {
             for (let j = 0; j < assignmentsHolder[i].data.length; j++) {
-                subSRSData[`${assignmentsHolder[i].data[j].data.subject_id}`]=assignmentsHolder[i].data[j].data.srs_stage;
-                if ([1, 2, 3, 4].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
+                subSRSData[assignmentsHolder[i].data[j].data.subject_id]=assignmentsHolder[i].data[j].data.srs_stage;
+                switch(assignmentsHolder[i].data[j].data.srs_stage) {
+                    case 1:
+                        srsData[0]++;
+                        break;
+                    case 2:
+                        srsData[0]++;
+                        break;
+                    case 3:
+                        srsData[0]++;
+                        break;
+                    case 4:
+                        srsData[0]++;
+                        break;
+                    case 5:
+                        srsData[1]++;
+                        break;
+                    case 6:
+                        srsData[1]++;
+                        break;
+                    case 7:
+                        srsData[2]++;
+                        break;
+                    case 8:
+                        srsData[3]++;
+                        break;
+                    case 9:
+                        srsData[4]++;
+                        break;
+                    default:
 
-                    srsData[0]++;
                 }
-                if ([5, 6].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
 
-                    srsData[1]++;
-                }
-
-                if ([7].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
-
-                    srsData[2]++;
-                }
-
-                if ([8].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
-
-                    srsData[3]++;
-                }
-
-                if ([9].includes(assignmentsHolder[i].data[j].data.srs_stage)) {
-
-                    srsData[4]++;
-                }
             }
         }
 
